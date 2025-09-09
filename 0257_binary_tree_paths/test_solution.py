@@ -37,50 +37,89 @@ class TreeNode:
                 index += 1
         return root
 
+    # def __repr__(self):
+    #     return f"TreeNode(val={self.val}, left={self.left}, right={self.right})"
+
     def __repr__(self):
-        return f"TreeNode(val={self.val}, left={self.left}, right={self.right})"
+        return f"TreeNode(val={self.val})"
 
 # Paste the LeetCode solution class here
 class Solution:
-    def outputStringWriter(self, path_nodes):
-        print("string writer")
-        alist = [node for node in path_nodes]
-        print(alist)
-        result = "->".join(str(val) for val in alist)
-        print(result)
-        return result
+    solution = []
 
+    # Time Complexity:
+    # Space Complexity: 
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
         results = []
         print(root)
         
         # Stack stores: [node, path_to_that_node]
-        stack = [ [root, [root.val]], ]  # Each entry is [current_node, path_so_far]
+        stack = [ [root, [str(root.val)]], ]  # Each entry is [current_node, path_so_far]
 
         while stack:
             node, path = stack.pop()
             print(f"NODE: {node.val}... PATH: {path}")
 
             if not node.left and not node.right:
-                results.append(path)
+                results.append("->".join(path))
                 print(f"FOUND LEAF PATH: {path}")
 
             if node.left:
                 print("GO LEFT!")
-                new_path = path + [node.left.val]
+                new_path = path + [str(node.left.val)]
                 stack.append([node.left, new_path])
 
             if node.right:
                 print("GO RIGHT!")
-                new_path = path + [node.right.val]
+                new_path = path + [str(node.right.val)]
                 stack.append([node.right, new_path])
 
             print(stack)
         
-        final_result = [self.outputStringWriter(s) for s in results]
-        print(final_result)
-        return final_result
+        print(results)
+        return results
+
+
+    def dfs(self, node: TreeNode, all_paths: List[List[int]], current_path: List[int]):
+
+        if not node:
+            print("WE SHOULDN'T BE HERE")
+            return
         
+        current_path.append(str(node.val))
+        # found a leaf
+        if not node.left and not node.right:
+            print("FOUND A LEAF!")
+            print(current_path)
+            all_paths.append("->".join(current_path))
+
+        if node.left:
+            self.dfs(node.left, all_paths, current_path)
+
+        if node.right:
+            self.dfs(node.right, all_paths, current_path)
+
+        current_path.pop()
+
+    
+
+    # Time Complexity:
+    # Space Complexity:     
+    def binaryTreePathRecursion(self, root: Optional[TreeNode]) -> List[str]:
+
+        if not root:
+            return []
+
+        all_paths = []
+        current_path = []
+
+        # all_paths in shared memory and paths are added when found
+        self.dfs(root, all_paths, current_path)
+        
+        print("All solutions:")
+        print(all_paths)
+        return all_paths
+
 
 # Test cases
 @pytest.mark.parametrize("node_list, expected_path_list", [
@@ -91,6 +130,8 @@ def test_solution(node_list, expected_path_list):
     root = TreeNode.from_list(node_list)
     solution = Solution()
     assert set(solution.binaryTreePaths(root)) == set(expected_path_list)
+
+    assert set(solution.binaryTreePathRecursion(root)) == set(expected_path_list)
 
 
 def monkey():
