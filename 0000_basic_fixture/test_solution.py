@@ -1,5 +1,7 @@
 
 import pytest
+from typing import List, Optional, Type
+
 
 # Paste the LeetCode solution class here
 class Solution:
