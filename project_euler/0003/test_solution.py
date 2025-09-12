@@ -1,6 +1,7 @@
 import pytest
 import math
-# 10 -> 
+# 10 ->
+
 
 class Solution:
     def is_prime(self, x: int) -> bool:
@@ -13,7 +14,7 @@ class Solution:
             return True
         elif x > 2:
             for i in range(3, x):
-                div, remainder = divmod(x,i)
+                div, remainder = divmod(x, i)
                 # another divisor which isnt itself
                 if remainder == 0:
                     print(f"Found another divisor -> {i}")
@@ -29,41 +30,44 @@ class Solution:
             prime_factors.append(2)
             x = x / 2
 
-
         i = 3
-        while i*i <= x:
+        while i * i <= x:
             if x % i == 0:
-                x = x/i
+                x = x / i
                 prime_factors.append(i)
             i += 1
 
-        
         if x > 1:
             prime_factors.append(x)
 
         print(f"All Prime factors: {prime_factors}")
         return max(prime_factors)
-        
 
 
-@pytest.mark.parametrize("x, expected",[
-    (10, False),
-    (11, True),
-    (99, False),
-    (91, False),
-    (97, True),
-])
+@pytest.mark.parametrize(
+    "x, expected",
+    [
+        (10, False),
+        (11, True),
+        (99, False),
+        (91, False),
+        (97, True),
+    ],
+)
 def test_is_prime(x, expected):
     solution = Solution()
 
     assert solution.is_prime(x) == expected
 
 
-@pytest.mark.parametrize("x, expected",[
-    (7, 7),
-    (13195, 29),
-    (600851475143, 6857),
-])
+@pytest.mark.parametrize(
+    "x, expected",
+    [
+        (7, 7),
+        (13195, 29),
+        (600851475143, 6857),
+    ],
+)
 def test_largest_prime_factor(x, expected):
     solution = Solution()
 

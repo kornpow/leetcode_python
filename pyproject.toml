@@ -24,3 +24,9 @@ addopts = [
     "-ra",                  # show extra test summary info for all except passed
     "--cache-clear",        # don't create .pytest_cache directories
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.13.0",
+    "ty>=0.0.1a20",
+]
