@@ -1,4 +1,3 @@
-
 import pytest
 from typing import List, Optional, Type
 
@@ -12,22 +11,25 @@ class Solution:
         print(dp)
 
         # calculate up to amount
-        for i in range(1, amount+1):
+        for i in range(1, amount + 1):
             for coin in coins:
                 # case 1: can make the value with single coin
                 if coin <= i:
-                    dp[i] = min(dp[i], 1 + dp[i-coin])
+                    dp[i] = min(dp[i], 1 + dp[i - coin])
 
         print(dp)
-        return dp[amount] if dp[amount] != float('inf') else -1
+        return dp[amount] if dp[amount] != float("inf") else -1
 
 
 # Test cases
-@pytest.mark.parametrize("coins, x, expected", [
-    ([1,2,3], 6, 2),
-    ([1,2,3], 8, 3),
-    ([1,2,4], 3, 2),
-])
+@pytest.mark.parametrize(
+    "coins, x, expected",
+    [
+        ([1, 2, 3], 6, 2),
+        ([1, 2, 3], 8, 3),
+        ([1, 2, 4], 3, 2),
+    ],
+)
 def test_solution(coins, x, expected):
     solution = Solution()
     assert solution.find_change(coins, x) == expected
