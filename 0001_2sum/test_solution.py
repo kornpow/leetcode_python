@@ -1,4 +1,3 @@
-
 import pytest
 from typing import List, Optional, Type
 
@@ -15,22 +14,22 @@ from typing import List, Optional, Type
 # THE ISSUE IS RELATED TO
 
 # SET:
-# 
+#
+
 
 # Paste the LeetCode solution class here
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         return self.twoSum_On2(nums, target)
 
-
     def twoSum_On2(self, nums: List[int], target: int) -> List[int]:
         numnums = len(nums)
-        for i in range(numnums-1):
-            for j in range(1,numnums):
+        for i in range(numnums - 1):
+            for j in range(1, numnums):
                 if i == j:
                     continue
                 if nums[i] + nums[j] == target:
-                    return (i,j)
+                    return (i, j)
 
     def twoSum_On(self, nums: List[int], target: int) -> List[int]:
         # O(n)
@@ -39,16 +38,22 @@ class Solution:
         for i, num in enumerate(nums):
             complement = target - num
             if complement in num_dict:
-                if i < num_dict[complement]: return (i, num_dict[complement])
-                else: return (num_dict[complement], i)
+                if i < num_dict[complement]:
+                    return (i, num_dict[complement])
+                else:
+                    return (num_dict[complement], i)
             num_dict[num] = i
 
+
 # Test cases
-@pytest.mark.parametrize("x, expected", [
-    (([2, 7, 11, 15], 9), (0,1)),
-    (([3, 2, 4], 6), (1,2)),
-    (([3, 3], 6), (0,1)),
-])
+@pytest.mark.parametrize(
+    "x, expected",
+    [
+        (([2, 7, 11, 15], 9), (0, 1)),
+        (([3, 2, 4], 6), (1, 2)),
+        (([3, 3], 6), (0, 1)),
+    ],
+)
 def test_solution(x, expected):
     solution = Solution()
     assert solution.twoSum_On(*x) == expected

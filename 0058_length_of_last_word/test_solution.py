@@ -1,10 +1,10 @@
-
 import pytest
 from typing import List, Optional, Type
 
 
 # The last word is the last set of characters
 # there can be more whitespace after the last word
+
 
 # Paste the LeetCode solution class here
 class Solution:
@@ -15,12 +15,14 @@ class Solution:
         lower_chars = [ord("a"), ord("z")]
         upper_chars = [ord("A"), ord("Z")]
 
-
         for char in s:
             char_digit = ord(char)
 
             # its a text char
-            if lower_chars[0] <= char_digit <= lower_chars[1] or upper_chars[0] <= char_digit <= upper_chars[1]:
+            if (
+                lower_chars[0] <= char_digit <= lower_chars[1]
+                or upper_chars[0] <= char_digit <= upper_chars[1]
+            ):
                 if whitespace_seen:
                     word_len = 1
                     whitespace_seen = 0
@@ -31,7 +33,6 @@ class Solution:
                 whitespace_seen = 1
 
         return word_len
-
 
     def lengthOfLastWord(self, s: str) -> int:
         end_index = len(s) - 1
@@ -55,12 +56,15 @@ class Solution:
 
 
 # Test cases
-@pytest.mark.parametrize("x, expected", [
-    ("Hello World", 5),
-    ("   fly me   to   the moon  ", 4),
-    ("luffy is still joyboy", 6),
-    ("dogs are fruffy and noice", 5)
-])
+@pytest.mark.parametrize(
+    "x, expected",
+    [
+        ("Hello World", 5),
+        ("   fly me   to   the moon  ", 4),
+        ("luffy is still joyboy", 6),
+        ("dogs are fruffy and noice", 5),
+    ],
+)
 def test_solution(x, expected):
     solution = Solution()
     assert solution.lengthOfLastWord_Initial(x) == expected

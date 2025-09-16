@@ -1,4 +1,3 @@
-
 import pytest
 from typing import List, Optional, Type
 
@@ -33,12 +32,13 @@ from typing import List, Optional, Type
 # o -> f
 # og -> f
 
+
 # Paste the LeetCode solution class here
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         # print("Running wordBreak!")
         max_word_len = max([len(word) for word in wordDict])
-        words_and_len = [(len(word),word) for word in wordDict]
+        words_and_len = [(len(word), word) for word in wordDict]
         words_and_len.sort(reverse=True)
         print(words_and_len)
         # make a wordset from wordDict
@@ -51,7 +51,7 @@ class Solution:
         # print(f"Word: {s} -> wordlist: {wordSet}")
 
         memo = {}
-        
+
         def expandOnIndex(start: int) -> bool:
             if start in memo:
                 return memo[start]
@@ -61,8 +61,6 @@ class Solution:
                 memo[start] = True
                 return True
 
-
-            
             i = 0
             # word = apple -> 0 + i = max_word_len -> s[0:i] =
 
@@ -75,12 +73,12 @@ class Solution:
                     continue
                 # we found a valid word in the window
                 # start looking for the next word start at the next char
-                check_word = s[start:start+next_word_len]
+                check_word = s[start : start + next_word_len]
                 # print(f"check_word: {check_word}")
                 if check_word in wordSet:
                     # cats + andog
                     # print(f"Found a valid word: {check_word}")
-                    if expandOnIndex(start+next_word_len):
+                    if expandOnIndex(start + next_word_len):
                         memo[start] = True
                         return True
                 i += 1
@@ -91,19 +89,17 @@ class Solution:
 
         return expandOnIndex(0)
 
-
-
     def wordBreakDP(self, s: str, wordDict: List[str]) -> bool:
         wordSet = set(wordDict)
         n = len(s)
 
         # DP: dp[i] says "is it possible to make a valid set of substrings...
         # from s[0:i], true or false
-        dp = [False] * (n+1)
+        dp = [False] * (n + 1)
 
-        dp[0] = True # empty string can always be segmented
+        dp[0] = True  # empty string can always be segmented
 
-        for i in range(1, n+1):
+        for i in range(1, n + 1):
             for j in range(i):
                 # check if dp has already been calculated to be true
                 # 0->j is a valid string
@@ -115,21 +111,43 @@ class Solution:
                     else:
                         pass
                 else:
-                    print(f"dp @ {j} is false, so impossible for dp @ {j}:{i} to be true")
+                    print(
+                        f"dp @ {j} is false, so impossible for dp @ {j}:{i} to be true"
+                    )
 
         return dp[n]
 
-# Test cases
-@pytest.mark.parametrize("x, expected", [
-    (("leetcode", ["leet","code"]), True),
-    (("applepenapple", ["apple","pen", "aaaaaaaaa"]), True),
-    (("catsandog", ["cats","dog","sand","and","cat"]), False),
-    (("catsanddog", ["cats","dog","sand","and","cat"]), True),
-    (("thiswontwork", ["this","won","work"]), False),
-    (("thiswontwork", ["this","wont","work"]), True),
-    (("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab",["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"]), False),
 
-])
+# Test cases
+@pytest.mark.parametrize(
+    "x, expected",
+    [
+        (("leetcode", ["leet", "code"]), True),
+        (("applepenapple", ["apple", "pen", "aaaaaaaaa"]), True),
+        (("catsandog", ["cats", "dog", "sand", "and", "cat"]), False),
+        (("catsanddog", ["cats", "dog", "sand", "and", "cat"]), True),
+        (("thiswontwork", ["this", "won", "work"]), False),
+        (("thiswontwork", ["this", "wont", "work"]), True),
+        (
+            (
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab",
+                [
+                    "a",
+                    "aa",
+                    "aaa",
+                    "aaaa",
+                    "aaaaa",
+                    "aaaaaa",
+                    "aaaaaaa",
+                    "aaaaaaaa",
+                    "aaaaaaaaa",
+                    "aaaaaaaaaa",
+                ],
+            ),
+            False,
+        ),
+    ],
+)
 def test_solution(x, expected):
     solution = Solution()
     assert solution.wordBreak(*x) == expected

@@ -1,4 +1,3 @@
-
 import pytest
 from typing import List, Optional, Type
 
@@ -79,10 +78,6 @@ from typing import List, Optional, Type
 # START_LIST = [-1, 0, 1]
 
 
-
-
-
-
 # Paste the LeetCode solution class here
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
@@ -99,7 +94,7 @@ class Solution:
             # choose smallest
             X1 = working_list.pop(0)
             SUM1 = X1
-            
+
             if SUM1 < 0:
                 X2 = working_list.pop()
             elif SUM1 > 0:
@@ -135,19 +130,22 @@ class Solution:
                 print("Pop Smallest")
                 start_list.pop()
                 # get biggest
-                found_list.append([X1,X2,X3])
+                found_list.append([X1, X2, X3])
 
         # print(partials)
         return found_list
 
 
 # Test cases
-@pytest.mark.parametrize("x, expected", [
-    ([-1,0,1,2,-1,-4], [[-1,-1,2],[-1,0,1]]),
-    ([0,1,1], []),
-    ([0,0,0], [[0,0,0]]),
-    ([-2,-4,6,0,-1,1], [[-2,-4,6],[0,-1,1]]),
-])
+@pytest.mark.parametrize(
+    "x, expected",
+    [
+        ([-1, 0, 1, 2, -1, -4], [[-1, -1, 2], [-1, 0, 1]]),
+        ([0, 1, 1], []),
+        ([0, 0, 0], [[0, 0, 0]]),
+        ([-2, -4, 6, 0, -1, 1], [[-2, -4, 6], [0, -1, 1]]),
+    ],
+)
 def test_solution(x, expected):
     solution = Solution()
     assert solution.threeSum(x) == expected

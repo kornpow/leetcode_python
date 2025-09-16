@@ -1,4 +1,3 @@
-
 import pytest
 from typing import List, Optional, Type
 
@@ -8,6 +7,7 @@ from typing import List, Optional, Type
 # Either x is not zero or n > 0. -> x != 0 OR n > 0
 
 # 2 ^ 5 = 2 * 2 * 2 * 2 * 2
+
 
 # TIME: O(n)
 # SPACE: O(1)
@@ -32,7 +32,6 @@ class Solution:
 
     #     return round(result,5)
 
-
     # recursion?
     # x^4 = x^3 * x => x^n = x ^ n-1
 
@@ -41,17 +40,20 @@ class Solution:
     # SPACE: O(log n)
     def myPow(self, x: float, n: int) -> float:
         if n < 0:
-            x = 1/x
+            x = 1 / x
             n = abs(n)
 
 
 # Test cases
-@pytest.mark.parametrize("x, n, expected", [
-    (2.00000, 10, 1024.00000),
-    (2.10000, 3, 9.26100),
-    (2.00000, -2, 0.25000),
-    (0.00001,2147483647, 0),
-])
-def test_solution(x,n , expected):
+@pytest.mark.parametrize(
+    "x, n, expected",
+    [
+        (2.00000, 10, 1024.00000),
+        (2.10000, 3, 9.26100),
+        (2.00000, -2, 0.25000),
+        (0.00001, 2147483647, 0),
+    ],
+)
+def test_solution(x, n, expected):
     solution = Solution()
-    assert solution.myPow(x,n) == expected
+    assert solution.myPow(x, n) == expected

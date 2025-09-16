@@ -1,4 +1,3 @@
-
 import pytest
 from typing import List, Optional, Type
 
@@ -36,13 +35,16 @@ class Solution:
 
 
 # Test cases
-@pytest.mark.parametrize("x, expected", [
-    (["flower","flow","flight"], "fl"),
-    (["dog","racecar","car"], ""),
-    (["cat","car",""], ""),
-    (["lamb","lamp","lamps"], "lam"),
-    (["bam","bambi","bambino"], "bam"),
-])
+@pytest.mark.parametrize(
+    "x, expected",
+    [
+        (["flower", "flow", "flight"], "fl"),
+        (["dog", "racecar", "car"], ""),
+        (["cat", "car", ""], ""),
+        (["lamb", "lamp", "lamps"], "lam"),
+        (["bam", "bambi", "bambino"], "bam"),
+    ],
+)
 def test_solution(x, expected):
     solution = Solution()
     assert solution.longestCommonPrefix(x) == expected

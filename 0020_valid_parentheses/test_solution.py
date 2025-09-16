@@ -1,4 +1,3 @@
-
 import pytest
 
 # use a stack?
@@ -22,8 +21,9 @@ openings = {
 closings = {
     "}": "{",
     ")": "(",
-    "]": "[",    
+    "]": "[",
 }
+
 
 # Paste the LeetCode solution class here
 class Solution:
@@ -38,7 +38,7 @@ class Solution:
                     return False
                 else:
                     stack.pop()
-            
+
             if char in openings:
                 stack.append(char)
 
@@ -49,17 +49,18 @@ class Solution:
         return True
 
 
-
 # Test cases
-@pytest.mark.parametrize("x, expected", [
-    ("()", True),
-    ("((", False),
-    ("()[]{}", True),
-    ("(]", False),
-    ("([])", True),
-    ("([)]", False),
-
-])
+@pytest.mark.parametrize(
+    "x, expected",
+    [
+        ("()", True),
+        ("((", False),
+        ("()[]{}", True),
+        ("(]", False),
+        ("([])", True),
+        ("([)]", False),
+    ],
+)
 def test_solution(x, expected):
     solution = Solution()
     assert solution.isValid(x) == expected

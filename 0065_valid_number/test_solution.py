@@ -1,4 +1,3 @@
-
 import pytest
 from typing import List, Optional, Type
 
@@ -24,11 +23,10 @@ class Solution:
 
         # check for signs in the middle
         if num_signs > 0:
-            if unsigned_test[0] not in ["+","-"]:
+            if unsigned_test[0] not in ["+", "-"]:
                 return False, test
 
-
-        test = test.replace("+","").replace("-","")
+        test = test.replace("+", "").replace("-", "")
         # print(f"Cleaned number: {test}")
         return num_signs < 2, test
 
@@ -38,7 +36,7 @@ class Solution:
             return False
 
         # print(f"Len cleaned: {len(cleaned)}")
-        # min decimal value 
+        # min decimal value
         if len(cleaned) < 2:
             return False
 
@@ -55,7 +53,7 @@ class Solution:
 
         if len(cleaned) < 1:
             return False
-        
+
         # ints have no decimal place
         if "." in cleaned:
             return False
@@ -95,36 +93,35 @@ class Solution:
                 return True
             else:
                 return False
-        else:  
+        else:
             if self.isInteger(main):
                 return True
             else:
                 return False
 
 
-
-
-
-
 # Test cases
-@pytest.mark.parametrize("x, expected", [
-    ("0", True),
-    ("e", False),
-    (".", False),
-    ("101.", True),
-    ("10e7", True),
-    ("10e7", True),
-    ("10e-7", True),
-    (".10e-7", True),
-    (".10.e-7", False),
-    (".10e-7.", False),
-    ("-.E3", False),
-    ("ee", False),
-    ("inf", False),
-    ("-inf", False),
-    ("6+1", False),
-    ("4e+", False),
-])
+@pytest.mark.parametrize(
+    "x, expected",
+    [
+        ("0", True),
+        ("e", False),
+        (".", False),
+        ("101.", True),
+        ("10e7", True),
+        ("10e7", True),
+        ("10e-7", True),
+        (".10e-7", True),
+        (".10.e-7", False),
+        (".10e-7.", False),
+        ("-.E3", False),
+        ("ee", False),
+        ("inf", False),
+        ("-inf", False),
+        ("6+1", False),
+        ("4e+", False),
+    ],
+)
 def test_solution(x, expected):
     solution = Solution()
     assert solution.isNumber(x) == expected

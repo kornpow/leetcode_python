@@ -1,4 +1,3 @@
-
 import pytest
 from typing import List, Optional, Type
 
@@ -28,7 +27,7 @@ class Solution:
         for i in range(len(s)):
             count = 0
             # O(N)
-            for j in range(i+1,len(s)+1):
+            for j in range(i + 1, len(s) + 1):
                 # allocate string
                 test_string = s[i:j]
                 # print(f"Test string: {test_string}")
@@ -50,7 +49,7 @@ class Solution:
 
         # mp stores the current index of a character
         mp = {}
-        
+
         #
         start_index = 0
         for end_index in range(n):
@@ -59,18 +58,22 @@ class Solution:
                 # increment the start index to be the max
                 # of the previous last seen and the current
                 start_index = max(start_index, mp[s[end_index]])
-                
-            ans = max(ans, end_index-start_index+1)
+
+            ans = max(ans, end_index - start_index + 1)
             mp[s[end_index]] = end_index + 1
 
         return ans
 
+
 # Test cases
-@pytest.mark.parametrize("x, expected", [
-    ("abcabcbb", 3),
-    ("bbbbb", 1),
-    ("pwwkew", 3),
-])
+@pytest.mark.parametrize(
+    "x, expected",
+    [
+        ("abcabcbb", 3),
+        ("bbbbb", 1),
+        ("pwwkew", 3),
+    ],
+)
 def test_solution(x, expected):
     solution = Solution()
     assert solution.lengthOfLongestSubstring(x) == expected
