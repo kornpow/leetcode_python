@@ -1,5 +1,4 @@
 import pytest
-from typing import List, Optional, Type
 
 # abcabcbb -> 3
 # create list of ints of the length of the string
