@@ -80,7 +80,7 @@ class Solution:
         max_len = len(s)
 
         # use an internal function so we dont need to pass in shared variables
-        def expandFromCenter(left: int, right: int) -> (str, int):
+        def expandFromCenter(left: int, right: int) -> tuple[str, int]:
             """
             if odd -> right - left = 2
             if even -> right - left = 1
@@ -102,9 +102,7 @@ class Solution:
             palindrome_length = right - left - 1
             palindrome_string = s[left + 1 : right]
 
-            print(
-                f"Found palindrome -> {palindrome_string}, with length: {palindrome_length}"
-            )
+            print(f"Found palindrome -> {palindrome_string}, with length: {palindrome_length}")
             # return palindrome, length of palindrome
             return palindrome_string, palindrome_length
 
@@ -117,9 +115,7 @@ class Solution:
             # palidrome of length 2, 4
             pal_even_str, pal_even_len = expandFromCenter(i, i + 1)
             print(pal_even_str, pal_odd_str)
-            current_len, current_pal = max(
-                (pal_odd_len, pal_odd_str), (pal_even_len, pal_even_str)
-            )
+            current_len, current_pal = max((pal_odd_len, pal_odd_str), (pal_even_len, pal_even_str))
 
             if current_len > len(longest_pal):
                 print(f"New longest: {longest_pal}")
