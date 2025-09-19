@@ -1,5 +1,6 @@
+from typing import List
+
 import pytest
-from typing import List, Optional, Type
 
 # check s[0], is it in word worddict?
 
@@ -37,7 +38,6 @@ from typing import List, Optional, Type
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         # print("Running wordBreak!")
-        max_word_len = max([len(word) for word in wordDict])
         words_and_len = [(len(word), word) for word in wordDict]
         words_and_len.sort(reverse=True)
         print(words_and_len)
@@ -46,9 +46,7 @@ class Solution:
         # checking inclusivity in wordList is O(N)
         wordSet = set(wordDict)
         strlen = len(s)
-        # print(f"Longest word in list has max len: {max_word_len}")
         wordSet = set(wordDict)
-        # print(f"Word: {s} -> wordlist: {wordSet}")
 
         memo = {}
 
@@ -111,9 +109,7 @@ class Solution:
                     else:
                         pass
                 else:
-                    print(
-                        f"dp @ {j} is false, so impossible for dp @ {j}:{i} to be true"
-                    )
+                    print(f"dp @ {j} is false, so impossible for dp @ {j}:{i} to be true")
 
         return dp[n]
 
